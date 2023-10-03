@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Attendance</title>
+    <!-- Add your logo or favicon using the link element -->
+    <link rel="icon" href="SJVN.ico" type="image/x-icon">
+    <link rel="icon" href="SJVN.png" type="image/png">
+    <link rel="apple-touch-icon" href="SJVN.png">
+<link rel="stylesheet" href="sting1.css">
+<body>
+          <img src="SJVN.png" alt="SJVN" width="50" height="70">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Attendance.html">Attendance</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<header>
+        <h1>Mess Attendance</h1>
+    </header>
+
+<div>
+  <form method="POST" name="google-sheet">
+    <label for="name"><b>Name</b></label>
+    <input type="text" id="fname" name="Name" placeholder="Your name..">
+
+  <div class="form-container">
+        <form id="dateForm">
+            <div>
+                <label for="date">Select a Date:</label>
+                <input type="date" id="date" name="Date" min="" required>
+  </div>
+   <script>
+        // Get today's date in the format "YYYY-MM-DD"
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Set the minimum date for the input to today
+        document.getElementById('date').min = today;
+
+        // Add event listener for form submission
+        document.getElementById('dateForm').addEventListener('submit', function(event) {
+            const selectedDate = document.getElementById('date').value;
+            
+            // Check if the selected date is in the future
+            if (selectedDate < today) {
+                alert('Please select a date in the future.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+  <p>
+    <label for="breakfast"><b>Breakfast</b></label>
+    <select id="breakfast" name="Breakfast">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    <label for="No. Of Plates(Breakfast)"><b>No. Of Plates(Breakfast)</b></label>
+    <select id="PB" name="Plates(Breakfast)">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="lunch"><b>Lunch</b></label>
+    <select id="lunch" name="Lunch">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+     <label for="No. Of Plates(Lunch)"><b>No. Of Plates(Lunch)</b></label>
+    <select id="Pl" name="Plates(Lunch)">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+      <p>
+   
+   <label for="Dinner"><b>Dinner</b></label>
+    <select id="Dinner" name="Dinner">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+     </p>
+  
+
+     <label for="No. Of Plates(Dinner)"><b>No. Of Plates(Dinner)</b></label>
+    <select id="PD" name="Plates(Dinner)">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </p>
+    <input type="submit" value="Submit" name="Submit">
+  </form>
+</div>
+
+          <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby0udzJ6KpHmDdU_EmjZaBvXgFOT_nllmj4jGKByDoLcwfmq4hC-omSK0AOk9D1Hf9O/exec'
+            const form = document.forms['google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => alert("Your Attendance Has Been Marked!! Thank U!!"))
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
+                  <footer>
+                          <p>&copy; 2023 Mess Attendance.&reg;</p>
+                          <p>Designed By <b>OM KRISHNA RAI</b></p>
+                  </footer>
+
+</body>
+</html>
+
+
